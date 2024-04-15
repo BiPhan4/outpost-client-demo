@@ -11,10 +11,10 @@ export interface Network {
 }
 
 export const malagaConfig: Network = {
-  chainId: "malaga-420",
-  rpcEndpoint: "https://rpc.malaga-420.cosmwasm.com/",
+  chainId: "localwasm-1",
+  rpcEndpoint: "http://localhost:51441",
   prefix: "wasm",
-  gasPrice: GasPrice.fromString("0.25umlg"),
-  feeToken: "umlg",
+  gasPrice: GasPrice.fromString("0.25uwsm"),
+  feeToken: "uwsm",
   faucetUrl: "https://faucet.malaga-420.cosmwasm.com/",
 };

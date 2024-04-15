@@ -1,4 +1,4 @@
-import { SigningCosmWasmClient } from "cosmwasm";
+import { SigningCosmWasmClient } from "@cosmjs/cosmwasm-stargate";
 import { Cw20Coin, InstantiateMsg } from "../../bindings/Cw20.types";
 
 export async function initToken(
@@ -24,7 +24,10 @@ export async function initToken(
     // @ts-ignore
     initMsg,
     "Test Token 1.0",
-    "auto",
+    {
+      amount: [],
+      gas: "200000",
+    },
     {
       admin: address,
     }
