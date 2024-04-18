@@ -4,25 +4,26 @@
   "description": "Scripts to deploy",
   "main": "index.js",
   "scripts": {
-    "upload_contract": "ts-node ./scripts/upload_contract.ts",
     "post_file": "ts-node ./scripts/post_file.ts",
+    "post_key": "ts-node ./scripts/post_key.ts",
+    "upload_contract": "ts-node ./scripts/upload_contract.ts",
     "fix": "eslint --fix \"./src/**/*.ts\" \"./scripts/*/*.ts\"",
     "lint": "eslint --max-warnings 0 \"./src/**/*.ts\" \"./scripts/**/*.ts\""
   },
   "dependencies": {
+    "@jackallabs/jackal.nodejs-protos": "1.0.2",
     "@cosmjs/cosmwasm-stargate": "^0.32.3",
     "@cosmjs/math": "^0.32.3",
+    "@cosmjs/proto-signing": "^0.32.3",
     "@cosmjs/stargate": "^0.32.3",
     "@cosmjs/tendermint-rpc": "^0.32.3",
-    "@cosmjs/proto-signing": "^0.32.3",
+    "@jackallabs/jackal.js-protos": "1.4.1",
     "@types/crypto-js": "^4.1.1",
     "@types/node": "^17.0.23",
     "axios": "^0.26.1",
     "cosmwasm": "^1.1.1",
     "dotenv": "^16.0.3",
-    "merkletreejs": "^0.2.31",
-    "ts-node": "^10.7.0",
-    "typescript": ">=2.7"
+    "merkletreejs": "^0.2.31"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.16.0",
@@ -35,6 +36,8 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-promise": "^5.0.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
-    "prettier": "^2.6.1"
+    "prettier": "^2.6.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
   }
 }

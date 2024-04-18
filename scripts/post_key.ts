@@ -5,7 +5,9 @@ import { hitFaucet } from "./helpers/hitFaucet";
 import { uploadContracts } from "./helpers/uploadContracts";
 import { initToken } from "./helpers/initToken";
 import { initOutpost } from "./helpers/initOutpost";
-import { postFromCli } from "./helpers/postFromCli";
+import { postKey } from "./helpers/postKey";
+import { CosmWasmClient } from "@cosmjs/cosmwasm-stargate";
+
 
 async function main(): Promise<void> {
   /**
@@ -34,19 +36,22 @@ async function main(): Promise<void> {
 
   // }
 
-  // Each user has their own instance of a contract, and we're going to use the contract
-  // that's instantiated in the outpost e2e tests.
-  // This contract's ica host already has a 's' root directory, so we can freely make children of s 
-  const contractAddress = "wasm14hj2tavq8fpesdwxxcu44rty3hh90vhujrvcmstl4zr3txmfvw9s0phg4d"
-  let loopCounter = 0;
 
+  const contractAddress = "wasm14hj2tavq8fpesdwxxcu44rty3hh90vhujrvcmstl4zr3txmfvw9s0phg4d"
+
+  // when you restart the outpost e2e test, it will create a different jkl host address each time,
+  // so we have to query for it.
+  const queryClient = await CosmWasmClient.connect(wasmdConfig.rpcEndpoint)
+  const queryMsg = { get_contract_state: {} };
+  const result = await client.queryContractSmart(contractAddress, queryMsg);
+  console.log(result.ica_info.ica_address)
+
+  let loopCounter = 0;
   // Loop indefinitely
   while (true) {
     try {
-      const memePath = `s/Memes${loopCounter}`;
-      const tx = await postFromCli(client, address, contractAddress, memePath);
+      const tx = await postKey(client, address, contractAddress, result.ica_info.ica_address);
       console.log(tx);
-      console.log(`Transaction for ${memePath} sent successfully.`);
     } catch (error) {
       console.error(`Error posting to ${contractAddress}:`, error);
     }
