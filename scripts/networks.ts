@@ -10,11 +10,12 @@ export interface Network {
   faucetUrl: string;
 }
 
-export const malagaConfig: Network = {
+export const wasmdConfig: Network = {
   chainId: "localwasm-1",
-  rpcEndpoint: "http://localhost:51441",
+  rpcEndpoint: "http://localhost:54498",
   prefix: "wasm",
   gasPrice: GasPrice.fromString("0.25uwsm"),
   feeToken: "uwsm",
+  // Haven't set up a faucet URL for wasmd yet, we're just funding the account in the e2e environment
   faucetUrl: "https://faucet.malaga-420.cosmwasm.com/",
 };
