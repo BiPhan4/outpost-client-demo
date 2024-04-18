@@ -1,5 +1,14 @@
-# academy-deploy
+# outpost-client-demo
 
-This repository contains the companion material to Chapter 3 from the CosmWasm Academy course "Frontend".
+This demo is only intended for the Jackal team at this time.
 
-Check out academy.cosmwasm.com !
+Make sure to update the rpcEndpoint in wasmdConfig every time a new e2e test environment is created for the storage outpost.
+
+Run from root:
+
+```
+yarn post_key
+  
+```
+
+
