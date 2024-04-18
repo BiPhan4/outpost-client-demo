@@ -12,7 +12,7 @@ export interface Network {
 
 export const wasmdConfig: Network = {
   chainId: "localwasm-1",
-  rpcEndpoint: "http://localhost:54498",
+  rpcEndpoint: "http://localhost:60982",
   prefix: "wasm",
   gasPrice: GasPrice.fromString("0.25uwsm"),
   feeToken: "uwsm",

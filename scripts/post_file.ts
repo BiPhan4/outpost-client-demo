@@ -7,17 +7,6 @@ import { initToken } from "./helpers/initToken";
 import { initOutpost } from "./helpers/initOutpost";
 import { postFromCli } from "./helpers/postFromCli";
 
-const contracts: Contract[] = [
-  // {
-  //   name: "cw20_base",
-  //   wasmFile: "./contracts/cw20_base.wasm",
-  // },
-  {
-    name: "storage_outpost",
-    wasmFile: "./contracts/storage_outpost.wasm",
-  },
-];
-
 async function main(): Promise<void> {
   /**
    *  We're going to upload & initialise the contract here!
@@ -45,22 +34,26 @@ async function main(): Promise<void> {
 
   // }
 
-  // upload the contract
-  const codeId = await uploadContracts(client, address, contracts);
+  const contractAddress = "wasm14hj2tavq8fpesdwxxcu44rty3hh90vhujrvcmstl4zr3txmfvw9s0phg4d"
+  let loopCounter = 0;
 
-  console.log(codeId)
+  // Loop indefinitely
+  while (true) {
+    try {
+      const memePath = `s/Memes${loopCounter}`;
+      const tx = await postFromCli(client, address, contractAddress, memePath);
+      console.log(tx);
+      console.log(`Transaction for ${memePath} sent successfully.`);
+    } catch (error) {
+      console.error(`Error posting to ${contractAddress}:`, error);
+    }
 
-  // instantiate the contract
-  const contractAddress = await initOutpost(client, address, codeId.storage_outpost)
-  console.log(contractAddress)
+    loopCounter++; // Increment the loop counter
 
-  const txHash = await postFromCli(client, address, contractAddress, "s/Home")
-  console.log(txHash)
-
-  console.log(contractAddress);
-
+    // Introduce a delay to avoid spamming
+    await new Promise(resolve => setTimeout(resolve, 1000)); // 1-second delay
+  }
 }
-
 
 main().then(
   () => {
