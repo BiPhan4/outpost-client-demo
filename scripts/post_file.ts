@@ -45,7 +45,6 @@ async function main(): Promise<void> {
     try {
       const memePath = `s/Memes${loopCounter}`;
       const tx = await postFromCli(client, address, contractAddress, memePath);
-      console.log(tx);
       console.log(`Transaction for ${memePath} sent successfully.`);
     } catch (error) {
       console.error(`Error posting to ${contractAddress}:`, error);

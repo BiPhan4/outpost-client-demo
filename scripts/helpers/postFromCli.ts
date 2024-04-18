@@ -26,9 +26,21 @@ export async function postFromCli(
         // no memo and no funds 
     );
     
-    // Return only the transactionHash and events
-    return {
-        transactionHash: info.transactionHash,
-        events: info.events
-    };
+    // Find the 'wasm-logging' event
+    const wasmLoggingEvent = info.events.find(event => event.type === 'wasm-logging');
+
+    // Extract and log the attributes of the 'wasm-logging' event
+    if (wasmLoggingEvent) {
+        console.log("WASM Logging Attributes:", wasmLoggingEvent.attributes);
+        return {
+            transactionHash: info.transactionHash,
+            wasmLoggingAttributes: wasmLoggingEvent.attributes
+        };
+    } else {
+        console.log("No WASM Logging Event Found.");
+        return {
+            transactionHash: info.transactionHash,
+            wasmLoggingAttributes: []
+        };
+    }
 }
