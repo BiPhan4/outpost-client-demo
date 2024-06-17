@@ -36,8 +36,7 @@ async function main(): Promise<void> {
 
   // }
 
-
-  const contractAddress = "wasm14hj2tavq8fpesdwxxcu44rty3hh90vhujrvcmstl4zr3txmfvw9s0phg4d"
+  const contractAddress = "archway13fv9plnd9mgfp9qndng4yafr8yprkqwgrzrtjdnp3u5zmyhch5lqsgwhzw"
 
   // when you restart the outpost e2e test, it will create a different jkl host address each time,
   // so we have to query for it.

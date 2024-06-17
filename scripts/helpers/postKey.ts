@@ -1,6 +1,9 @@
 import { SigningCosmWasmClient, ExecuteResult } from "@cosmjs/cosmwasm-stargate";
 import { ChannelOpenInitOptions, InstantiateMsg, ExecuteMsg, CosmosMsgForEmpty } from "../../bindings/StorageOutpost.types";
 import { Pubkey } from '@jackallabs/jackal.nodejs-protos'; 
+import { Coin } from "@cosmjs/amino";
+
+
 
 export async function postKey(
     client: SigningCosmWasmClient,
@@ -41,13 +44,18 @@ export async function postKey(
         }
     };
 
+    const coin = {
+        denom: "aconst",
+        amount: "42000000000000000000"
+    }
+
     const info = await client.execute(
         senderAddress,
         contractAddress,
         sendCosmosMsgsToExecute, 
         { // fee 
-            amount: [],
-            gas: "3000000",
+            amount: [coin],
+            gas: "300000000",
         },
         // no memo and no funds 
     );
