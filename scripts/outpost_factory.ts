@@ -7,6 +7,8 @@ import { initToken } from "./helpers/initToken";
 import { initOutpost } from "./helpers/initOutpost";
 import { createOutpost } from "./helpers/createOutpost";
 import { CosmWasmClient, Event } from "@cosmjs/cosmwasm-stargate";
+import { postKey } from "./helpers/postKey";
+
 
 import delay from 'delay';
 import * as bip39 from 'bip39';
@@ -79,10 +81,32 @@ async function main(): Promise<void> {
   const queryClient = await CosmWasmClient.connect(wasmdConfig.rpcEndpoint)
   const queryMsg = { get_user_outpost_address: { user_address: addressB } };
   
-  const result = await queryClient.queryContractSmart(factoryContractAddress, queryMsg);
-  console.log(result)
+  const outpostAddressFromQuery = await queryClient.queryContractSmart(factoryContractAddress, queryMsg);
+  console.log(outpostAddressFromQuery)
 
   // check outpost works
+
+  // Wait for the ica channel handshake to complete and the ica host address to be set 
+  console.log('Starting the sleep function');
+  await sleep(30000); // Sleep for 30 seconds
+  console.log('Finished sleeping for 30 seconds');
+
+  // Get userB's ica host address
+  let jackcalHostAddress: string | undefined;
+  const outpostQueryMsg = { get_contract_state: {} };
+  const outpostQueryResp = await queryClient.queryContractSmart(outpostAddress!, outpostQueryMsg);
+  console.log(outpostQueryResp)
+  jackcalHostAddress = outpostQueryResp.ica_info.ica_address
+  console.log(jackcalHostAddress)
+
+  try {
+    const tx = await postKey(clientB, addressB, outpostAddress!, jackcalHostAddress!);
+    console.log(tx);
+  } catch (error) {
+    console.error(`Error posting to ${outpostAddress}:`, error);
+  }
+
+  // Can confirm via CLI that pubkey is saved on canine-chain
 
 }
 

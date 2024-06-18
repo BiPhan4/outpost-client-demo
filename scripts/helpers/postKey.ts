@@ -45,8 +45,8 @@ export async function postKey(
     };
 
     const coin = {
-        denom: "aconst",
-        amount: "42000000000000000000"
+        denom: "uwsm",
+        amount: "10000000"
     }
 
     const info = await client.execute(
@@ -55,7 +55,7 @@ export async function postKey(
         sendCosmosMsgsToExecute, 
         { // fee 
             amount: [coin],
-            gas: "300000000",
+            gas: "500000",
         },
         // no memo and no funds 
     );
