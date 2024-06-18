@@ -72,7 +72,15 @@ async function main(): Promise<void> {
 
   console.log(outpostAddress)
 
-  // query for map
+  // query to ensure that userB's outpost address and 
+  // the address saved into their user_address<>outpost_address mapping inside the factory
+  // are one and the same
+
+  const queryClient = await CosmWasmClient.connect(wasmdConfig.rpcEndpoint)
+  const queryMsg = { get_user_outpost_address: { user_address: addressB } };
+  
+  const result = await queryClient.queryContractSmart(factoryContractAddress, queryMsg);
+  console.log(result)
 
   // check outpost works
 
