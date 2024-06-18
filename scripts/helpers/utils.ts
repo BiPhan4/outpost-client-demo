@@ -31,10 +31,10 @@ function loadWasmFile(path: string): Uint8Array {
 export type Contract = LocalContract | RemoteContract;
 
 // Check "MNEMONIC" env variable and ensure it is set to a reasonable value
-export function getMnemonic(): string {
-  const mnemonic = process.env["MNEMONIC"];
+export function getMnemonic(envVar: string): string {
+  const mnemonic = process.env[envVar];
   if (!mnemonic || mnemonic.length < 48) {
-    throw new Error("Must set MNEMONIC to a 12 word phrase");
+    throw new Error("Must set MNEMONIC to a 12 or 24 word phrase"); 
   }
   return mnemonic;
 }

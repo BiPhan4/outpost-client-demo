@@ -4,6 +4,7 @@
   "description": "Scripts to deploy",
   "main": "index.js",
   "scripts": {
+    "upload_factory": "ts-node ./scripts/upload_factory.ts",
     "create_outpost": "ts-node ./scripts/outpost_factory.ts",
     "post_file": "ts-node ./scripts/post_file.ts",
     "post_key": "ts-node ./scripts/post_key.ts",
