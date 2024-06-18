@@ -45,6 +45,8 @@ export async function uploadContracts(
       amount: "700000000000000000"
     }
 
+    // try this in future: 580778940000000000
+
     const receipt = await client.upload(
       signer,
       wasm,
