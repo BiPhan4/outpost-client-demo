@@ -11,11 +11,11 @@ export interface Network {
 }
 
 export const wasmdConfig: Network = {
-  chainId: "constantine-3",
-  rpcEndpoint: "https://rpc.constantine.archway.io:443",
-  prefix: "archway",
-  gasPrice: GasPrice.fromString("1000000000000000aconst"),
-  feeToken: "aconst",
+  chainId: "localwasm-1",
+  rpcEndpoint: "http://localhost:57463",
+  prefix: "wasm",
+  gasPrice: GasPrice.fromString("0.25uwsm"),
+  feeToken: "uwsm",
   // Haven't set up a faucet URL for wasmd yet, we're just funding the account in the e2e environment
   faucetUrl: "https://faucet.malaga-420.cosmwasm.com/",
 };
