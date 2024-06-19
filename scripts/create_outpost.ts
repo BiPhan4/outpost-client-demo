@@ -13,13 +13,23 @@ import { postKey } from "./helpers/postKey";
 import delay from 'delay';
 import * as bip39 from 'bip39';
 
+/*
 
+WARNING: MUST READ
+
+This file demonstrates using the outpost factory's transactions and queries. 
+
+Before running 'yarn create_outpost'
+
+you must run 'go test -v . -run TestWithFactoryClientTestSuite -testify.m TestOutpostFactoryClient -timeout 12h'
+
+from within 'storage-outpost/e2e/interchaintest' 
+
+and update 'rpcEndpoint' in wasmdConfig
+
+*/
 
 async function main(): Promise<void> {
-  /**
-   *  We're going to upload & initialise the contract here!
-   *  Check out the video course on academy.cosmwasm.com!
-   */
 
   // Get our mnemonic for wasmd userA 
 
@@ -99,8 +109,15 @@ async function main(): Promise<void> {
   jackcalHostAddress = outpostQueryResp.ica_info.ica_address
   console.log(jackcalHostAddress)
 
+  let key: string = "testing the factory";
+
+  const coin = {
+    denom: "uwsm",
+    amount: "10000000"
+  }
+
   try {
-    const tx = await postKey(clientB, addressB, outpostAddress!, jackcalHostAddress!);
+    const tx = await postKey(clientB, addressB, outpostAddress!, jackcalHostAddress!, key, coin);
     console.log(tx);
   } catch (error) {
     console.error(`Error posting to ${outpostAddress}:`, error);
