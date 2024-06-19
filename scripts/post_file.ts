@@ -15,7 +15,7 @@ async function main(): Promise<void> {
 
   // Get our mnemonic
 
-  const mnemonic = getMnemonic();
+  const mnemonic = getMnemonic("MNEMONIC");
   
   // get a signingclient
   const { client, address } = await connect(mnemonic, wasmdConfig);

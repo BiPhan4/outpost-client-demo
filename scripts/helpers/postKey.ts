@@ -10,12 +10,14 @@ export async function postKey(
     senderAddress: string,
     contractAddress: string,
     icaHostAddress: string,
+    key: string,
+    coin: Coin,
 ) {
 
     // Declare an instance of Pubkey msg 
     const pubkeyInstance: Pubkey = {
         address: icaHostAddress,
-        key: "hey it's Bi coming at you from Typescript with Love! <3"
+        key: key,
     };
     
     // Encode the msg to Protobuf wire format
@@ -43,11 +45,6 @@ export async function postKey(
             // timeout_seconds: 3600
         }
     };
-
-    const coin = {
-        denom: "uwsm",
-        amount: "10000000"
-    }
 
     const info = await client.execute(
         senderAddress,
