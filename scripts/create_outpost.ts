@@ -8,6 +8,8 @@ import { initOutpost } from "./helpers/initOutpost";
 import { createOutpost } from "./helpers/createOutpost";
 import { CosmWasmClient, Event } from "@cosmjs/cosmwasm-stargate";
 import { postKey } from "./helpers/postKey";
+import { ChannelOpenInitOptions, InstantiateMsg } from "../bindings/StorageOutpost.types";
+
 
 
 import delay from 'delay';
@@ -26,6 +28,8 @@ you must run 'go test -v . -run TestWithFactoryClientTestSuite -testify.m TestOu
 from within 'storage-outpost/e2e/interchaintest' 
 
 and update 'rpcEndpoint' in wasmdConfig
+
+NOTE: The address of the created storage outpost is retrieved from the 'wasm' event. See 'printWasmEventAttributes' and 'getOutpostAddress' below
 
 */
 
@@ -69,8 +73,8 @@ async function main(): Promise<void> {
 
   // Wait for the bank send to finish
   console.log('Starting the sleep function');
-  await sleep(3000); // Sleep for 1 second
-  console.log('Finished sleeping for 1 seconds');
+  await sleep(3000); // Sleep for 3 seconds
+  console.log('Finished sleeping for 3 seconds');
 
   let outpostAddress: string | undefined;
 
@@ -102,12 +106,12 @@ async function main(): Promise<void> {
   console.log('Finished sleeping for 30 seconds');
 
   // Get userB's ica host address
-  let jackcalHostAddress: string | undefined;
+  let jackalHostAddress: string | undefined;
   const outpostQueryMsg = { get_contract_state: {} };
   const outpostQueryResp = await queryClient.queryContractSmart(outpostAddress!, outpostQueryMsg);
   console.log(outpostQueryResp)
-  jackcalHostAddress = outpostQueryResp.ica_info.ica_address
-  console.log(jackcalHostAddress)
+  jackalHostAddress = outpostQueryResp.ica_info.ica_address
+  console.log(jackalHostAddress)
 
   let key: string = "testing the factory";
 
@@ -117,13 +121,52 @@ async function main(): Promise<void> {
   }
 
   try {
-    const tx = await postKey(clientB, addressB, outpostAddress!, jackcalHostAddress!, key, coin);
+    const tx = await postKey(clientB, addressB, outpostAddress!, jackalHostAddress!, key, coin);
     console.log(tx);
   } catch (error) {
     console.error(`Error posting to ${outpostAddress}:`, error);
   }
 
-  // Can confirm via CLI that pubkey is saved on canine-chain
+  // Confirmed via CLI that pubkey is saved on canine-chain
+
+  // ***Instantiating Outpost Without Factory***
+  
+  // let's init the outpost directly to show that it has new optional owner and callback fields
+  // callback can be ignored but owner should definitely be set 
+
+  const channelOptions: ChannelOpenInitOptions = {
+    connection_id: "connection-0",
+    counterparty_connection_id: "connection-0",
+    tx_encoding: "proto3"
+  }
+
+  const initMsg: InstantiateMsg = {
+    // consider removing this admin field here, it really has no authority. 
+    // This initMsg is just a jsonObject, but admin authority is actually set by 'clientB.instantiate' below
+    // which calls the wasm.instantiate protobuf msg. 
+    admin: addressB, 
+    channel_open_init_options: channelOptions, 
+    owner: addressB,
+  };
+
+  // need options:admin
+  const info = await clientB.instantiate(
+      addressB,
+      1, // On devnet, codeID for storage outpost is always 1 because it's the first wasm file stored on chain
+      initMsg,
+      "storage outpost for userB",
+      {
+          amount: [coin],
+          gas: "2000000",
+      },
+      {
+          admin: addressB,
+      }
+  );
+  // WARNING: Check against jackal.js 
+  console.log(info.contractAddress);
+
+
 
 }
 

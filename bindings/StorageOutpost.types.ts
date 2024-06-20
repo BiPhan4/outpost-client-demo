@@ -4,10 +4,18 @@
 * and run the @cosmwasm/ts-codegen generate command to regenerate this file.
 */
 
+export type Binary = string;
 export type TxEncoding = "proto3" | "proto3json";
 export interface InstantiateMsg {
   admin?: string | null;
+  callback?: Callback | null;
   channel_open_init_options?: ChannelOpenInitOptions | null;
+  owner?: string | null;
+}
+export interface Callback {
+  contract: string;
+  msg?: Binary | null;
+  outpost_owner: string;
 }
 export interface ChannelOpenInitOptions {
   connection_id: string;
@@ -68,7 +76,6 @@ export type BankMsg = {
   };
 };
 export type Uint128 = string;
-export type Binary = string;
 export type IbcMsg = {
   transfer: {
     amount: Coin;
@@ -181,6 +188,8 @@ export type QueryMsg = {
   get_contract_state: {};
 } | {
   get_callback_counter: {};
+} | {
+  ownership: {};
 };
 export interface CallbackCounter {
   error: number;
@@ -216,4 +225,16 @@ export interface IcaInfo {
   channel_id: string;
   encoding: TxEncoding;
   ica_address: string;
+}
+export type Expiration = {
+  at_height: number;
+} | {
+  at_time: Timestamp;
+} | {
+  never: {};
+};
+export interface OwnershipForString {
+  owner?: string | null;
+  pending_expiry?: Expiration | null;
+  pending_owner?: string | null;
 }

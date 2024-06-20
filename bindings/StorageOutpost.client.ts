@@ -6,12 +6,13 @@
 
 import { CosmWasmClient, SigningCosmWasmClient, ExecuteResult } from "@cosmjs/cosmwasm-stargate";
 import { StdFee } from "@cosmjs/amino";
-import { TxEncoding, InstantiateMsg, ChannelOpenInitOptions, ExecuteMsg, CosmosMsgForEmpty, BankMsg, Uint128, Binary, IbcMsg, Timestamp, Uint64, WasmMsg, GovMsg, VoteOption, Decimal, Coin, Empty, IbcTimeout, IbcTimeoutBlock, WeightedVoteOption, QueryMsg, CallbackCounter, IbcOrder, ChannelStatus, ChannelState, IbcChannel, IbcEndpoint, Addr, ContractState, IcaInfo } from "./StorageOutpost.types";
+import { Binary, TxEncoding, InstantiateMsg, Callback, ChannelOpenInitOptions, ExecuteMsg, CosmosMsgForEmpty, BankMsg, Uint128, IbcMsg, Timestamp, Uint64, WasmMsg, GovMsg, VoteOption, Decimal, Coin, Empty, IbcTimeout, IbcTimeoutBlock, WeightedVoteOption, QueryMsg, CallbackCounter, IbcOrder, ChannelStatus, ChannelState, IbcChannel, IbcEndpoint, Addr, ContractState, IcaInfo, Expiration, OwnershipForString } from "./StorageOutpost.types";
 export interface StorageOutpostReadOnlyInterface {
   contractAddress: string;
   getChannel: () => Promise<ChannelState>;
   getContractState: () => Promise<ContractState>;
   getCallbackCounter: () => Promise<CallbackCounter>;
+  ownership: () => Promise<OwnershipForString>;
 }
 export class StorageOutpostQueryClient implements StorageOutpostReadOnlyInterface {
   client: CosmWasmClient;
@@ -23,6 +24,7 @@ export class StorageOutpostQueryClient implements StorageOutpostReadOnlyInterfac
     this.getChannel = this.getChannel.bind(this);
     this.getContractState = this.getContractState.bind(this);
     this.getCallbackCounter = this.getCallbackCounter.bind(this);
+    this.ownership = this.ownership.bind(this);
   }
 
   getChannel = async (): Promise<ChannelState> => {
@@ -38,6 +40,11 @@ export class StorageOutpostQueryClient implements StorageOutpostReadOnlyInterfac
   getCallbackCounter = async (): Promise<CallbackCounter> => {
     return this.client.queryContractSmart(this.contractAddress, {
       get_callback_counter: {}
+    });
+  };
+  ownership = async (): Promise<OwnershipForString> => {
+    return this.client.queryContractSmart(this.contractAddress, {
+      ownership: {}
     });
   };
 }
