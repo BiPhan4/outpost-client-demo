@@ -29,3 +29,13 @@ export const archwayTestnetConfig: Network = {
   // TODO: set up faucet
   faucetUrl: "",
 };
+
+export const archwayMainnetConfig: Network = {
+  chainId: "archway-1",
+  rpcEndpoint: "https://rpc.mainnet.archway.io:443", // This is our personal RPC 
+  prefix: "archway",
+  gasPrice: GasPrice.fromString("1000000000000000aarch"),
+  feeToken: "aarch",
+  // TODO: set up faucet
+  faucetUrl: "",
+};

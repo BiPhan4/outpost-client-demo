@@ -41,7 +41,7 @@ export async function uploadContracts(
     console.debug(`Uploading ${contract.name}...`);
 
     const coin = {
-      denom: "aconst",
+      denom: "aarch",
       amount: "700000000000000000"
     }
 
