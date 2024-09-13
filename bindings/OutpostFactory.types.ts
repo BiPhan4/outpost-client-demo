@@ -5,7 +5,7 @@
 */
 
 export interface InstantiateMsg {
-  storage_outpost_code_id: number;
+  bindings_code_id: number;
 }
 export type ExecuteMsg = {
   create_outpost: {

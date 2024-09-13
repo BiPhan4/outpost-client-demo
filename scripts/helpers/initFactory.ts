@@ -8,12 +8,12 @@ export async function initFactory(
 ) {
 
     const initMsg: InstantiateMsg = {
-        storage_outpost_code_id: 2980,
+        bindings_code_id: 5,
     };
 
     const coin = {
-        denom: "aconst",
-        amount: "280000000000000000"
+        denom: "ujkl",
+        amount: "10000000"
       }
 
     // need options:admin
@@ -21,7 +21,7 @@ export async function initFactory(
         address,
         factoryCodeID,
         initMsg,
-        "outpost factory",
+        "bindings factory",
         {
             amount: [coin],
             gas: "2000000",

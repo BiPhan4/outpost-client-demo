@@ -1,6 +1,6 @@
 import { Contract, getMnemonic } from "./helpers/utils";
 import { connect } from "./helpers/connect";
-import { wasmdConfig, archwayTestnetConfig, archwayMainnetConfig } from "./networks";
+import { wasmdConfig, archwayTestnetConfig, archwayMainnetConfig, jklTestnetConfig } from "./networks";
 import { hitFaucet } from "./helpers/hitFaucet";
 import { uploadContracts } from "./helpers/uploadContracts";
 import { initToken } from "./helpers/initToken";
@@ -10,23 +10,23 @@ import { postFromCli } from "./helpers/postFromCli";
 // WARNING: we recently used this to deploy on main net 
 const contracts: Contract[] = [
 
+  // {
+  //   name: "filetree",
+  //   wasmFile: "./contracts/filetree.wasm",
+  // },
   {
-    name: "storage_outpost",
-    wasmFile: "./contracts/storage_outpost.wasm",
-  },
-  {
-    name: "outpost_factory",
-    wasmFile: "./contracts/outpost_factory.wasm",
+    name: "bindings_factory",
+    wasmFile: "./contracts/bindings_factory.wasm",
   },
 ];
 
 async function main(): Promise<void> {
   
 
-  const mnemonic = getMnemonic("ARCHTESTSEED");
+  const mnemonic = getMnemonic("JKLTESTSEED");
   
   // get a signingclient
-  const { client, address } = await connect(mnemonic, archwayMainnetConfig);
+  const { client, address } = await connect(mnemonic, jklTestnetConfig);
 
   // check if given wallet has enough balance 
   const {amount} = await client.getBalance(address, wasmdConfig.feeToken); 

@@ -39,3 +39,13 @@ export const archwayMainnetConfig: Network = {
   // TODO: set up faucet
   faucetUrl: "",
 };
+
+export const jklTestnetConfig: Network = {
+  chainId: "lupulella-2",
+  rpcEndpoint: "https://testnet-rpc.jackalprotocol.com:443", // This is our personal RPC 
+  prefix: "jkl",
+  gasPrice: GasPrice.fromString("1000000ujkl"),
+  feeToken: "ukjl",
+  // TODO: set up faucet
+  faucetUrl: "",
+};
