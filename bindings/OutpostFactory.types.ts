@@ -12,10 +12,11 @@ export type ExecuteMsg = {
     channel_open_init_options: ChannelOpenInitOptions;
   };
 } | {
-  map_user_outpost: {
-    outpost_owner: string;
+  add_to_white_list: {
+    jkl_address: string;
   };
 };
+
 export type TxEncoding = "proto3" | "proto3json";
 export interface ChannelOpenInitOptions {
   connection_id: string;

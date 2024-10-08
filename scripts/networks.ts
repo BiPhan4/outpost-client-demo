@@ -22,7 +22,7 @@ export const wasmdConfig: Network = {
 
 export const archwayTestnetConfig: Network = {
   chainId: "constantine-3",
-  rpcEndpoint: "http://172.233.221.58:26657", // This is our personal RPC 
+  rpcEndpoint: "https://rpc.constantine.archway.io:443", // This is our personal RPC 
   prefix: "archway",
   gasPrice: GasPrice.fromString("1000000000000000aconst"),
   feeToken: "aconst",

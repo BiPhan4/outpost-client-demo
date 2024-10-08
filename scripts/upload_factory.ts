@@ -26,7 +26,7 @@ async function main(): Promise<void> {
   const mnemonic = getMnemonic("ARCHTESTSEED");
   
   // get a signingclient
-  const { client, address } = await connect(mnemonic, archwayMainnetConfig);
+  const { client, address } = await connect(mnemonic, archwayTestnetConfig);
 
   // check if given wallet has enough balance 
   const {amount} = await client.getBalance(address, wasmdConfig.feeToken); 

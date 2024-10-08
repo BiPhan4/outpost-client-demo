@@ -31,7 +31,11 @@ async function main(): Promise<void> {
   const {amount} = await client.getBalance(address, wasmdConfig.feeToken); 
   
   // instantiate the contract
+<<<<<<< Updated upstream
   const contractAddress = await initFactory(client, address, 2981)
+=======
+  const contractAddress = await initFactory(client, address, 9)
+>>>>>>> Stashed changes
   console.log(contractAddress)
 
   // returned this: 

@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "outpost_archway": "ts-node ./scripts/outpost_archway.ts",
+    "white_list": "ts-node ./scripts/white_list.ts",
     "init_factory": "ts-node ./scripts/init_factory.ts",
     "upload_factory": "ts-node ./scripts/upload_factory.ts",
     "create_outpost": "ts-node ./scripts/create_outpost.ts",
