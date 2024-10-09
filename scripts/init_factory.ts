@@ -1,6 +1,6 @@
 import { Contract, getMnemonic } from "./helpers/utils";
 import { connect } from "./helpers/connect";
-import { wasmdConfig, archwayTestnetConfig } from "./networks";
+import { wasmdConfig, archwayTestnetConfig, archwayMainnetConfig } from "./networks";
 import { hitFaucet } from "./helpers/hitFaucet";
 import { uploadContracts } from "./helpers/uploadContracts";
 import { initToken } from "./helpers/initToken";
@@ -9,14 +9,14 @@ import { postFromCli } from "./helpers/postFromCli";
 
 const contracts: Contract[] = [
 
-  {
-    name: "storage_outpost",
-    wasmFile: "./contracts/storage_outpost.wasm",
-  },
-  {
-    name: "outpost_factory",
-    wasmFile: "./contracts/outpost_factory.wasm",
-  },
+  // {
+  //   name: "storage_outpost",
+  //   wasmFile: "./contracts/storage_outpost.wasm",
+  // },
+  // {
+  //   name: "outpost_factory",
+  //   wasmFile: "./contracts/outpost_factory.wasm",
+  // },
 ];
 
 async function main(): Promise<void> {
@@ -25,13 +25,13 @@ async function main(): Promise<void> {
   const mnemonic = getMnemonic("ARCHTESTSEED");
   
   // get a signingclient
-  const { client, address } = await connect(mnemonic, archwayTestnetConfig);
+  const { client, address } = await connect(mnemonic, archwayMainnetConfig);
 
   // check if given wallet has enough balance 
   const {amount} = await client.getBalance(address, wasmdConfig.feeToken); 
   
   // instantiate the contract
-  const contractAddress = await initFactory(client, address, 2981)
+  const contractAddress = await initFactory(client, address, 692)
   console.log(contractAddress)
 
   // returned this: 

@@ -11,12 +11,12 @@ import { postFromCli } from "./helpers/postFromCli";
 const contracts: Contract[] = [
 
   {
-    name: "storage_outpost",
-    wasmFile: "./contracts/storage_outpost.wasm",
+    name: "outpost",
+    wasmFile: "./contracts/outpost.wasm",
   },
   {
-    name: "outpost_factory",
-    wasmFile: "./contracts/outpost_factory.wasm",
+    name: "factory",
+    wasmFile: "./contracts/factory.wasm",
   },
 ];
 

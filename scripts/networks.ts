@@ -39,3 +39,6 @@ export const archwayMainnetConfig: Network = {
   // TODO: set up faucet
   faucetUrl: "",
 };
+
+// https://rpc.mainnet.archway.io
+// https://rpc.mainnet.archway.io:443
