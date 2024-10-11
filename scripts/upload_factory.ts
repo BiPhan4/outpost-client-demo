@@ -12,11 +12,11 @@ const contracts: Contract[] = [
 
   {
     name: "outpost",
-    wasmFile: "./contracts/outpost.wasm",
+    wasmFile: "./contracts/ro_outpost.wasm",
   },
   {
     name: "factory",
-    wasmFile: "./contracts/factory.wasm",
+    wasmFile: "./contracts/reopen_factory.wasm",
   },
 ];
 

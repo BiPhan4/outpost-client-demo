@@ -31,7 +31,7 @@ async function main(): Promise<void> {
   const {amount} = await client.getBalance(address, wasmdConfig.feeToken); 
   
   // instantiate the contract
-  const contractAddress = await initFactory(client, address, 692)
+  const contractAddress = await initFactory(client, address, 696)
   console.log(contractAddress)
 
   // returned this: 

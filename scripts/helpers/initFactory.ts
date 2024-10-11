@@ -8,7 +8,7 @@ export async function initFactory(
 ) {
 
     const initMsg: InstantiateMsg = {
-        storage_outpost_code_id: 691,
+        storage_outpost_code_id: 695,
     };
 
     const coin = {
